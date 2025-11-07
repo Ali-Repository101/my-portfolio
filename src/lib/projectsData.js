@@ -19,7 +19,7 @@ export const projectsData = [
         image: "/images/portfolio.png",
         type: "Web Portfolio",
         stars: 58,
-        link: "https://arshad-portfolio.vercel.app/",
+        link: "https://arshad-ali.vercel.app/",
         github: "https://github.com/Ali-Repository101/my-portfolio",
     },
     {
