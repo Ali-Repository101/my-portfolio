@@ -11,6 +11,7 @@ const Header = () => {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => setMounted(true), []);
   useEffect(() => {
@@ -39,18 +40,15 @@ const Header = () => {
     >
       <div className="container mx-auto px-6">
         <nav className="flex justify-between items-center">
+          {/* Logo */}
           <Link href="/" className="flex items-center gap-2">
-            <Image
-              src="/images/logo.png"
-              alt="Arshad Ali Logo"
-              width={40}
-              height={40}
-            />
+            <Image src="/images/logo.png" alt="Arshad Ali Logo" width={40} height={40} />
             <span className="text-2xl font-extrabold bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent">
               Arshad&nbsp;Ali<span className="text-gray-500">.</span>
             </span>
           </Link>
 
+          {/* Desktop Nav */}
           <div className="hidden md:flex items-center space-x-8">
             {navLinks.map((link) => (
               <motion.a
@@ -64,7 +62,7 @@ const Header = () => {
               </motion.a>
             ))}
 
-            {/* Download Resume Button */}
+            {/* Download Resume */}
             <motion.a
               href="/files/ArshadAli_CV.pdf"
               download
@@ -76,11 +74,9 @@ const Header = () => {
               Resume
             </motion.a>
 
-            {/* Hire Me Button */}
+            {/* Hire Me */}
             <motion.button
-              onClick={() =>
-                (window.location.href = "mailto:arshadalik526@gmail.com")
-              }
+              onClick={() => (window.location.href = "mailto:arshadalik526@gmail.com")}
               className="flex items-center gap-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white px-5 py-2.5 rounded-full text-sm font-medium shadow-lg hover:shadow-xl transition-all duration-300"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -99,7 +95,66 @@ const Header = () => {
               {theme === "dark" ? <FaSun /> : <FaMoon />}
             </motion.button>
           </div>
+
+          {/* Mobile Menu Button */}
+          <div className="md:hidden">
+            <motion.button
+              onClick={() => setMenuOpen(!menuOpen)}
+              className="p-2 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-300"
+              whileTap={{ scale: 0.9 }}
+            >
+              {menuOpen ? <FaTimes size={18} /> : <FaBars size={18} />}
+            </motion.button>
+          </div>
         </nav>
+
+        {/* Mobile Menu */}
+        <AnimatePresence>
+          {menuOpen && (
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.3 }}
+              className="md:hidden mt-4 flex flex-col items-center space-y-4 pb-4 border-t border-gray-200 dark:border-gray-700"
+            >
+              {navLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-purple-400 font-medium text-sm uppercase tracking-wider"
+                  onClick={() => setMenuOpen(false)}
+                >
+                  {link.label}
+                </Link>
+              ))}
+
+              <a
+                href="/files/ArshadAli_CV.pdf"
+                download
+                className="flex items-center gap-2 border border-blue-500 dark:border-purple-500 text-blue-600 dark:text-purple-400 px-4 py-2 rounded-full text-sm font-medium hover:bg-gradient-to-r hover:from-blue-500 hover:to-purple-600 hover:text-white transition-all duration-300"
+              >
+                <FaDownload className="text-sm" />
+                Resume
+              </a>
+
+              <button
+                onClick={() => (window.location.href = 'mailto:arshadalik526@gmail.com')}
+                className="flex items-center gap-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white px-4 py-2 rounded-full text-sm font-medium shadow-md hover:shadow-lg transition-all duration-300"
+              >
+                <FaPaperPlane className="text-sm" />
+                Hire Me
+              </button>
+
+              <button
+                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                className="p-2 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-yellow-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-300"
+              >
+                {theme === "dark" ? <FaSun /> : <FaMoon />}
+              </button>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </header>
   );
