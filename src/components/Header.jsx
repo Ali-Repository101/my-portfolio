@@ -3,7 +3,7 @@
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { FaMoon, FaSun, FaBars, FaTimes, FaPaperPlane } from "react-icons/fa";
+import { FaMoon, FaSun, FaBars, FaTimes, FaPaperPlane, FaDownload } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 
@@ -45,7 +45,6 @@ const Header = () => {
               alt="Arshad Ali Logo"
               width={40}
               height={40}
-              // className="rounded-full"
             />
             <span className="text-2xl font-extrabold bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent">
               Arshad&nbsp;Ali<span className="text-gray-500">.</span>
@@ -64,6 +63,18 @@ const Header = () => {
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-500 dark:bg-purple-500 transition-all duration-300 group-hover:w-full"></span>
               </motion.a>
             ))}
+
+            {/* Download Resume Button */}
+            <motion.a
+              href="/files/ArshadAli_CV.pdf"
+              download
+              className="flex items-center gap-2 border border-blue-500 dark:border-purple-500 text-blue-600 dark:text-purple-400 px-5 py-2.5 rounded-full text-sm font-medium shadow-sm hover:bg-gradient-to-r hover:from-blue-500 hover:to-purple-600 hover:text-white transition-all duration-300"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <FaDownload className="text-sm" />
+              Resume
+            </motion.a>
 
             {/* Hire Me Button */}
             <motion.button

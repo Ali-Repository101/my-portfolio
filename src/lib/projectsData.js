@@ -12,6 +12,17 @@ export const projectsData = [
         github: "",
     },
     {
+        title: "Arshad Ali – Portfolio",
+        description:
+            "Personal portfolio built with Next.js and Tailwind CSS, featuring smooth animations, dark mode, and project showcases.",
+        tech: ["Next.js", "Framer Motion", "Tailwind CSS", "React Icons"],
+        image: "/images/portfolio.png",
+        type: "Web Portfolio",
+        stars: 58,
+        link: "https://arshad-portfolio.vercel.app/",
+        github: "https://github.com/Ali-Repository101/my-portfolio",
+    },
+    {
         title: "Viper Plus – Intrusion Detection",
         description:
             "Smart intrusion detection using Dahua SDK with instant alerts, image capture, and AWS cloud integration.",

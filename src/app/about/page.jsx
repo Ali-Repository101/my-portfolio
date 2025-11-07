@@ -139,7 +139,7 @@ const About = () => {
           </p>
           <a
             href="#projects"
-            className="inline-block px-6 py-3 rounded-full text-white font-semibold bg-gradient-to-r from-primary to-secondary hover:opacity-90 transition"
+            className="inline-block px-6 py-3 rounded-full text-white font-semibold bg-gradient-to-r from-blue-500 to-purple-600 hover:opacity-90 transition"
           >
             View My Projects
           </a>

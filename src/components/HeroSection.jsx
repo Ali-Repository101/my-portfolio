@@ -119,11 +119,12 @@ const HeroSection = () => {
             >
               <a
                 href="#contact"
-                className="px-8 py-3 bg-gradient-to-r from-[#3b82f6] to-[#9333ea]
- text-white rounded-lg font-medium transition-all duration-300 shadow-lg hover:shadow-xl"
+                className={`px-8 py-3 bg-gradient-to-r from-[#3b82f6] to-[#9333ea]
+  text-white rounded-lg font-medium transition-all duration-300 shadow-lg hover:shadow-xl`}
               >
                 Contact Me
               </a>
+
               <a
                 href="#projects"
                 className="px-8 py-3 bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-800 dark:text-white rounded-lg font-medium transition-all duration-300 shadow-lg hover:shadow-xl border border-gray-200 dark:border-gray-700"
@@ -150,10 +151,8 @@ const HeroSection = () => {
                 />
               </div>
               <div className="absolute -bottom-4 -right-4 bg-white dark:bg-gray-800 px-4 py-2 rounded-full shadow-lg border border-gray-200 dark:border-gray-700">
-                <span className="font-bold text-primary">
-                  3+
-                </span>{" "}
-                Years Experience
+                <span className="font-bold text-primary">3+</span> Years
+                Experience
               </div>
             </div>
           </div>
