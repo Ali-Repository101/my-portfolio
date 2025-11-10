@@ -90,7 +90,7 @@ const About = () => {
               <TimelineCard
                 year="2019 - 2022"
                 title="Bachelor of Computer Applications (BCA)"
-                university="Swami Vivekanand Subharti University, Meerut"
+                university="Sri Guru Gobind Singh College Chandigarh"
                 subjects={[
                   "Programming Fundamentals",
                   "Database Systems",
