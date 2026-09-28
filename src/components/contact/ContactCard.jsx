@@ -1,31 +1,25 @@
-"use client";
-import { motion } from "framer-motion";
-
+/** One contact detail row (rendered inside a divided list). */
 const ContactCard = ({ item }) => (
-  <motion.div
-    initial={{ opacity: 0, x: -20 }}
-    whileInView={{ opacity: 1, x: 0 }}
-    transition={{ duration: 0.5, delay: item.delay }}
-    viewport={{ once: true }}
-    className="flex items-start p-6 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 hover:shadow-lg transition-all"
-  >
-    <div className="text-primary dark:text-secondary p-4 bg-primary/10 dark:bg-secondary/20 rounded-lg mr-6">
+  <li className="flex items-start gap-4 py-5">
+    <span
+      className="mt-0.5 flex size-9 shrink-0 items-center justify-center rounded-md border border-border text-muted-foreground"
+      aria-hidden="true"
+    >
       {item.icon}
-    </div>
-    <div>
-      <h5 className="font-semibold text-lg text-gray-800 dark:text-white mb-1">
+    </span>
+    <div className="min-w-0">
+      <h3 className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
         {item.title}
-      </h5>
+      </h3>
       <a
         href={item.link}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-secondary transition-colors"
+        {...(item.link.startsWith("http") && { target: "_blank", rel: "noopener noreferrer" })}
+        className="mt-1 block break-words text-base text-foreground transition-colors hover:text-primary"
       >
         {item.content}
       </a>
     </div>
-  </motion.div>
+  </li>
 );
 
 export default ContactCard;

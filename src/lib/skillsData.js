@@ -1,52 +1,76 @@
-import {
-    FaHtml5, FaCss3Alt, FaBootstrap, FaJsSquare, FaReact, FaNodeJs, FaGitAlt, FaServer, FaDatabase,
-} from "react-icons/fa";
-import {
-    SiTailwindcss, SiRedux, SiPostgresql, SiSocketdotio, SiPostman,
-    SiExpress, SiMongodb, SiGithub, SiNextdotjs, SiTypescript, SiAwslambda,
-} from "react-icons/si";
-import { DiVisualstudio } from "react-icons/di";
+import { FaReact, FaServer } from "react-icons/fa";
+import { FiCode, FiCloud, FiCpu } from "react-icons/fi";
 
+// Categories and names follow the "Technical Skills" section of
+// public/files/ArshadAli_CV.pdf. Earlier portfolio skills that the resume
+// doesn't list (Tailwind CSS, Bootstrap, VSCode, Postman) are kept, not dropped.
+// AI coding assistants from the resume (Antigravity, Trae, Kiro) are tooling,
+// not project technologies, so they are intentionally not listed here.
 export const skillCategories = [
     {
+        title: "Languages",
+        icon: <FiCode />,
+        skills: [
+            { name: "JavaScript" },
+            { name: "TypeScript" },
+            { name: "HTML5" },
+            { name: "CSS3" },
+        ],
+    },
+    {
         title: "Frontend",
-        icon: <FaReact className="text-xl" />,
+        icon: <FaReact />,
         skills: [
-            { icon: <FaHtml5 className="text-orange-500" />, name: "HTML5" },
-            { icon: <FaCss3Alt className="text-blue-500" />, name: "CSS3" },
-            { icon: <SiTailwindcss className="text-cyan-400" />, name: "Tailwind CSS" },
-            { icon: <FaBootstrap className="text-purple-500" />, name: "Bootstrap" },
-            { icon: <FaReact className="text-blue-400" />, name: "React.js" },
-            { icon: <SiNextdotjs className="text-black dark:text-white" />, name: "Next.js" },
-            { icon: <SiRedux className="text-purple-400" />, name: "Redux" },
+            { name: "React" },
+            { name: "Next.js" },
+            { name: "React Native" },
+            { name: "Expo / EAS" },
+            { name: "Redux" },
+            { name: "Zustand" },
+            { name: "TanStack Query" },
+            { name: "React Hook Form" },
+            { name: "Zod" },
+            { name: "i18next" },
+            { name: "React Native Paper" },
+            { name: "Tailwind CSS" },
+            { name: "Bootstrap" },
         ],
     },
     {
-        title: "Backend",
-        icon: <FaServer className="text-xl" />,
+        title: "Backend & Data",
+        icon: <FaServer />,
         skills: [
-            { icon: <FaNodeJs className="text-green-500" />, name: "Node.js" },
-            { icon: <SiExpress className="text-gray-500" />, name: "Express.js" },
-            { icon: <SiSocketdotio className="text-black dark:text-white" />, name: "Socket.io" },
+            { name: "Node.js" },
+            { name: "Express.js" },
+            { name: "REST APIs" },
+            { name: "Socket.IO" },
+            { name: "MongoDB" },
+            { name: "PostgreSQL" },
+            { name: "Drizzle ORM" },
+            { name: "Redis" },
         ],
     },
     {
-        title: "Databases",
-        icon: <FaDatabase className="text-xl" />,
+        title: "Cloud & Tools",
+        icon: <FiCloud />,
         skills: [
-            { icon: <SiMongodb className="text-green-600" />, name: "MongoDB" },
-            { icon: <SiPostgresql className="text-blue-600" />, name: "PostgreSQL" },
+            { name: "AWS (S3)" },
+            { name: "Vercel" },
+            { name: "Railway" },
+            { name: "Shopify App Bridge" },
+            { name: "React Router 7" },
+            { name: "Cashfree" },
+            { name: "DataForSEO" },
+            { name: "Git" },
+            { name: "GitHub" },
+            { name: "NPM" },
+            { name: "VSCode" },
+            { name: "Postman" },
         ],
     },
     {
-        title: "DevOps & Tools",
-        icon: <FaGitAlt className="text-xl" />,
-        skills: [
-            { icon: <FaGitAlt className="text-orange-600" />, name: "Git" },
-            { icon: <SiGithub className="text-gray-800 dark:text-gray-200" />, name: "GitHub" },
-            { icon: <SiAwslambda className="text-orange-400" />, name: "AWS" },
-            { icon: <DiVisualstudio className="text-blue-500" />, name: "VSCode" },
-            { icon: <SiPostman className="text-orange-500" />, name: "Postman" },
-        ],
+        title: "AI Engineering",
+        icon: <FiCpu />,
+        skills: [{ name: "Anthropic SDK" }, { name: "Claude" }],
     },
 ];

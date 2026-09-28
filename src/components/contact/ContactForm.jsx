@@ -2,7 +2,10 @@
 import { useRef, useState } from "react";
 import { motion } from "framer-motion";
 import emailjs from "@emailjs/browser";
-import { FaPaperPlane } from "react-icons/fa";
+import { FiSend } from "react-icons/fi";
+import { cn } from "@/lib/utils";
+import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 
 const ContactForm = () => {
   const formRef = useRef(null);
@@ -30,13 +33,13 @@ const ContactForm = () => {
         process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
       );
 
-      setStatus({ ok: true, msg: "Message sent successfully 🎉" });
+      setStatus({ ok: true, msg: "Message sent successfully." });
       formRef.current.reset();
     } catch (err) {
       console.error("EmailJS error:", err);
       setStatus({
         ok: false,
-        msg: "Failed to send message 😕 Please try again.",
+        msg: "Failed to send message. Please try again.",
       });
     } finally {
       setIsSubmitting(false);
@@ -44,33 +47,31 @@ const ContactForm = () => {
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-      viewport={{ once: true }}
-      className="bg-white dark:bg-gray-800 p-8 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm"
-    >
-      <h3 className="text-2xl font-bold mb-6 text-gray-800 dark:text-white">
+    <Card className="p-6 sm:p-8" data-aos="fade-up">
+      <h3 className="text-lg font-semibold tracking-tight text-foreground">
         Send Me a Message
       </h3>
 
-      {status && (
-        <motion.div
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          className={`mb-6 p-4 rounded-lg border ${
-            status.ok
-              ? "bg-green-50 text-green-800 border-green-200 dark:bg-green-900/20 dark:text-green-200 dark:border-green-800"
-              : "bg-red-50 text-red-800 border-red-200 dark:bg-red-900/20 dark:text-red-200 dark:border-red-800"
-          }`}
-        >
-          {status.msg}
-        </motion.div>
-      )}
+      {/* Live region stays mounted so screen readers announce status changes */}
+      <div role="status" aria-live="polite">
+        {status && (
+          <motion.div
+            initial={{ opacity: 0, y: -4 }}
+            animate={{ opacity: 1, y: 0 }}
+            className={cn(
+              "mt-6 rounded-md border px-4 py-3 text-sm",
+              status.ok
+                ? "border-green-600/25 bg-green-600/5 text-green-800 dark:border-green-400/25 dark:bg-green-400/5 dark:text-green-300"
+                : "border-red-600/25 bg-red-600/5 text-red-800 dark:border-red-400/25 dark:bg-red-400/5 dark:text-red-300"
+            )}
+          >
+            {status.msg}
+          </motion.div>
+        )}
+      </div>
 
-      <form ref={formRef} onSubmit={handleSubmit}>
-        <div className="grid md:grid-cols-2 gap-6 mb-6">
+      <form ref={formRef} onSubmit={handleSubmit} aria-busy={isSubmitting} className="mt-6 space-y-5">
+        <div className="grid gap-5 sm:grid-cols-2">
           <Input
             label="Your Name *"
             name="user_name"
@@ -90,7 +91,6 @@ const ContactForm = () => {
           label="Subject"
           name="subject"
           placeholder="Regarding a project opportunity"
-          className="mb-6"
         />
         <Textarea
           label="Your Message *"
@@ -99,17 +99,18 @@ const ContactForm = () => {
           required
         />
 
-        <motion.button
+        <Button
           type="submit"
+          variant="primary"
+          size="lg"
           disabled={isSubmitting}
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
-          className="w-full bg-gradient-to-r from-[#3b82f6] to-[#9333ea] text-white font-medium py-4 px-6 rounded-lg flex items-center justify-center shadow hover:shadow-md transition-all"
+          className="w-full disabled:cursor-wait"
         >
           {isSubmitting ? (
             <>
               <svg
-                className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+                className="size-4 animate-spin"
+                aria-hidden="true"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
@@ -132,43 +133,48 @@ const ContactForm = () => {
             </>
           ) : (
             <>
-              <FaPaperPlane className="mr-3" /> Send Message
+              <FiSend className="size-4" aria-hidden="true" /> Send Message
             </>
           )}
-        </motion.button>
+        </Button>
       </form>
-    </motion.div>
+    </Card>
   );
 };
 
-// 🔹 Input component
+const fieldClass =
+  "w-full rounded-md border border-input bg-background px-3 text-sm text-foreground placeholder:text-muted-foreground/70 transition-colors hover:border-foreground/30 focus-visible:border-ring";
+
+const Label = ({ htmlFor, children }) => (
+  <label htmlFor={htmlFor} className="mb-2 block text-sm font-medium text-foreground">
+    {children}
+  </label>
+);
+
 const Input = ({ label, name, type = "text", placeholder, required = false }) => (
   <div>
-    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-      {label}
-    </label>
+    <Label htmlFor={`contact-${name}`}>{label}</Label>
     <input
+      id={`contact-${name}`}
       type={type}
       name={name}
       required={required}
       placeholder={placeholder}
-      className="w-full px-4 py-3 text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 dark:focus:ring-purple-500 outline-none transition-all hover:border-gray-400 dark:hover:border-gray-500"
+      className={cn(fieldClass, "h-10")}
     />
   </div>
 );
 
-// 🔹 Textarea component
 const Textarea = ({ label, name, placeholder, required = false }) => (
-  <div className="mb-10 mt-4">
-    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-      {label}
-    </label>
+  <div>
+    <Label htmlFor={`contact-${name}`}>{label}</Label>
     <textarea
+      id={`contact-${name}`}
       name={name}
       rows="5"
       required={required}
       placeholder={placeholder}
-      className="w-full px-4 py-3 text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 dark:focus:ring-purple-500 outline-none transition-all hover:border-gray-400 dark:hover:border-gray-500"
+      className={cn(fieldClass, "min-h-32 resize-y py-2.5 leading-6")}
     ></textarea>
   </div>
 );
