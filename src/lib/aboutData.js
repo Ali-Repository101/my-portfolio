@@ -9,6 +9,10 @@ export const profile = {
         "Passionate about building fast, reliable, and modern web apps — always exploring new technologies to create better digital experiences.",
     // Resume headline: "Full Stack Developer | React Native · Next.js · Node.js · MERN"
     coreStack: ["React Native", "Next.js", "Node.js", "MERN"],
+    // Resume summary: "3.8+ years building and shipping production web and mobile applications"
+    experienceYears: "3.8+",
+    // Resume summary: "Experience spans multi-tenant SaaS, e-commerce and Shopify embedded apps"
+    domains: ["Multi-tenant SaaS", "E-commerce", "Shopify embedded apps"],
 };
 
 export const experience = [

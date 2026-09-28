@@ -94,12 +94,15 @@ const Header = () => {
   return (
     <header
       className={cn(
-        "fixed inset-x-0 top-0 z-50 border-b transition-colors duration-200",
+        "fixed inset-x-0 top-0 z-50 border-b transition-colors duration-300",
+        // Over the (always dark) hero the header adopts dark tokens and sits
+        // transparently on the stage; once scrolled it becomes the theme's glass bar.
+        !scrolled && "dark",
         menuOpen
           ? "border-border bg-background"
           : scrolled
-            ? "border-border bg-background/90 backdrop-blur-md"
-            : "border-transparent bg-background"
+            ? "border-border bg-background/80 backdrop-blur-xl"
+            : "border-transparent bg-transparent"
       )}
     >
       <Container>

@@ -47,8 +47,12 @@ const ContactForm = () => {
   };
 
   return (
-    <Card className="p-6 sm:p-8" data-aos="fade-up">
-      <h3 className="text-lg font-semibold tracking-tight text-foreground">
+    <div className="relative" data-aos="fade-up">
+      {/* Light source behind the elevated surface (decorative) */}
+      <div aria-hidden="true" className="pointer-events-none absolute -inset-10 -z-10 rounded-full bg-[radial-gradient(closest-side,rgba(59,130,246,0.18),transparent)] blur-2xl" />
+    <Card className="shadow-depth relative overflow-hidden rounded-3xl border-white/10 bg-gradient-to-b from-white/[0.06] to-white/[0.02] p-6 backdrop-blur-sm sm:p-10">
+      <div aria-hidden="true" className="absolute inset-x-10 top-0 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent" />
+      <h3 className="text-2xl font-semibold tracking-[-0.02em] text-foreground">
         Send Me a Message
       </h3>
 
@@ -104,7 +108,7 @@ const ContactForm = () => {
           variant="primary"
           size="lg"
           disabled={isSubmitting}
-          className="w-full disabled:cursor-wait"
+          className="h-12 w-full rounded-full text-[15px] shadow-[0_0_0_1px_rgba(255,255,255,0.08),0_10px_40px_-10px_rgba(96,165,250,0.55)] transition-[background-color,box-shadow] duration-300 hover:bg-white hover:shadow-[0_0_0_1px_rgba(255,255,255,0.15),0_16px_50px_-10px_rgba(96,165,250,0.75)] disabled:cursor-wait"
         >
           {isSubmitting ? (
             <>
@@ -139,14 +143,15 @@ const ContactForm = () => {
         </Button>
       </form>
     </Card>
+    </div>
   );
 };
 
 const fieldClass =
-  "w-full rounded-md border border-input bg-background px-3 text-sm text-foreground placeholder:text-muted-foreground/70 transition-colors hover:border-foreground/30 focus-visible:border-ring";
+  "w-full rounded-xl border border-white/10 bg-black/30 px-4 text-sm text-foreground placeholder:text-muted-foreground/70 transition-colors hover:border-white/20 focus-visible:border-ring";
 
 const Label = ({ htmlFor, children }) => (
-  <label htmlFor={htmlFor} className="mb-2 block text-sm font-medium text-foreground">
+  <label htmlFor={htmlFor} className="mb-2 block font-mono text-[11px] font-medium uppercase tracking-[0.16em] text-muted-foreground">
     {children}
   </label>
 );
@@ -160,7 +165,7 @@ const Input = ({ label, name, type = "text", placeholder, required = false }) =>
       name={name}
       required={required}
       placeholder={placeholder}
-      className={cn(fieldClass, "h-10")}
+      className={cn(fieldClass, "h-12")}
     />
   </div>
 );
@@ -174,7 +179,7 @@ const Textarea = ({ label, name, placeholder, required = false }) => (
       rows="5"
       required={required}
       placeholder={placeholder}
-      className={cn(fieldClass, "min-h-32 resize-y py-2.5 leading-6")}
+      className={cn(fieldClass, "min-h-36 resize-y py-3 leading-6")}
     ></textarea>
   </div>
 );
