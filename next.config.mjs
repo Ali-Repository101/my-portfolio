@@ -3,9 +3,11 @@ const nextConfig = {
   /* config options here */
   reactCompiler: true,
   images: {
-    domains: [
-      "www.cobry.co.uk", // 👈 allow this domain
-      "localhost",        // optional, for local testing
+    // Equivalent to the former `images.domains` list: hostname-only patterns
+    // match any protocol, port, path and query string, exactly as `domains` did.
+    remotePatterns: [
+      { hostname: "www.cobry.co.uk" }, // 👈 allow this domain
+      { hostname: "localhost" },       // optional, for local testing
     ],
   },
   // The portfolio is a single page; old section routes point to their anchors.
